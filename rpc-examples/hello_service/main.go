@@ -2,23 +2,24 @@ package main
 
 import (
 	"fmt"
-	"github.com/yufeifly/gopl.io/other/rpc-examples/hello_service/service"
 	"log"
 	"net"
 	"net/rpc"
 	"net/rpc/jsonrpc"
+
 	"github.com/yufeifly/advance-go/rpc-examples/hello_service/pb"
+	"github.com/yufeifly/advance-go/rpc-examples/hello_service/service"
 )
 
 type HelloService struct{}
 
 func (p *HelloService) Hello(request *pb.String, reply *pb.String) error {
-	reply. = "hello:" + request.	return nil
+	reply.Value = "hello:" + request.Value
+	return nil
 }
 
 func main() {
 	service.RegisterHelloService(new(HelloService))
-
 	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {
 		log.Fatal("ListenTCP error:", err)

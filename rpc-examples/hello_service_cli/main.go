@@ -2,20 +2,22 @@ package main
 
 import (
 	"fmt"
-	"github.com/yufeifly/gopl.io/other/rpc-examples/hello_service/service"
 	"log"
 	"net"
 	"net/rpc"
 	"net/rpc/jsonrpc"
+
+	"github.com/yufeifly/advance-go/rpc-examples/hello_service/service"
 )
 
 type HelloServiceClient struct {
 	*rpc.Client
 }
 
-var _ service.HelloServiceInterface = (*HelloServiceClient)(nil)
+var _ .HelloServiceInterface = (*HelloServiceClient)(nil)
 
 func DialHelloService(network, address string) (*HelloServiceClient, error) {
+	service.HelloServiceInterface()
 	//c, err := rpc.Dial(network, address)
 	c, err := net.Dial(network, address)
 	if err != nil {

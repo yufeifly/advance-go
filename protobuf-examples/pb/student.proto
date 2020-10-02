@@ -1,5 +1,5 @@
 syntax = "proto3";
-package main;
+package pb;
 
 // this is a comment
 message Student {
