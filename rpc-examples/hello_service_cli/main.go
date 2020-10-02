@@ -7,6 +7,7 @@ import (
 	"net/rpc"
 	"net/rpc/jsonrpc"
 
+	"github.com/yufeifly/advance-go/rpc-examples/hello_service/pb"
 	"github.com/yufeifly/advance-go/rpc-examples/hello_service/service"
 )
 
@@ -14,11 +15,9 @@ type HelloServiceClient struct {
 	*rpc.Client
 }
 
-var _ .HelloServiceInterface = (*HelloServiceClient)(nil)
+var _ service.HelloServiceInterface = (*HelloServiceClient)(nil)
 
 func DialHelloService(network, address string) (*HelloServiceClient, error) {
-	service.HelloServiceInterface()
-	//c, err := rpc.Dial(network, address)
 	c, err := net.Dial(network, address)
 	if err != nil {
 		return nil, err
@@ -26,7 +25,7 @@ func DialHelloService(network, address string) (*HelloServiceClient, error) {
 	return &HelloServiceClient{Client: rpc.NewClientWithCodec(jsonrpc.NewClientCodec(c))}, nil
 }
 
-func (p *HelloServiceClient) Hello(request string, reply *string) error {
+func (p *HelloServiceClient) Hello(request *pb.String, reply *pb.String) error {
 	return p.Client.Call(service.HelloServiceName+".Hello", request, reply)
 }
 
@@ -36,8 +35,10 @@ func main() {
 		log.Fatal("dialing:", err)
 	}
 
-	var reply string
-	err = client.Hello("hello", &reply)
+	var reply pb.String
+	var request pb.String
+	request.Value = "hello"
+	err = client.Hello(&request, &reply)
 	if err != nil {
 		log.Fatal(err)
 	}
