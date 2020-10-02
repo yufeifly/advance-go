@@ -1,6 +1,6 @@
-module github.com/yufeifly/gopl.io/other/rpc-examples/hello_service
+module github.com/yufeifly/advance-go/protobuf-examples
 
-go 1.14
+go 1.15
 
 require (
 	github.com/golang/protobuf v1.4.2

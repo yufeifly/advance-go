@@ -7,13 +7,13 @@ import (
 	"net"
 	"net/rpc"
 	"net/rpc/jsonrpc"
+	"github.com/yufeifly/advance-go/rpc-examples/hello_service/pb"
 )
 
 type HelloService struct{}
 
-func (p *HelloService) Hello(request string, reply *string) error {
-	*reply = "hello:" + request
-	return nil
+func (p *HelloService) Hello(request *pb.String, reply *pb.String) error {
+	reply. = "hello:" + request.	return nil
 }
 
 func main() {
