@@ -8,7 +8,6 @@ import (
 	"net/rpc/jsonrpc"
 
 	"github.com/yufeifly/advance-go/rpc-examples/hello_service/pb"
-	"github.com/yufeifly/advance-go/rpc-examples/hello_service/service"
 )
 
 type HelloService struct{}
@@ -19,7 +18,8 @@ func (p *HelloService) Hello(request *pb.String, reply *pb.String) error {
 }
 
 func main() {
-	service.RegisterHelloService(new(HelloService))
+	//service.RegisterHelloService(new(HelloService))
+	pb.RegisterHelloService(rpc.NewServer(), new(HelloService))
 	listener, err := net.Listen("tcp", ":1234")
 	if err != nil {
 		log.Fatal("ListenTCP error:", err)
